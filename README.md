@@ -1,6 +1,6 @@
 # H2
 
-Supporting light weight extensions for heavy task lifting. Enabling extensions that can do provide you with small digital luxuries!
+Supporting light weight extensions for heavy task lifting. Enabling extensions that can provide you with small digital luxuries!
 
 ## Installation
 

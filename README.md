@@ -1,6 +1,6 @@
 # H2
 
-Inspired by being lazy, a hook-in and up system, supporting light weight extensions for heavy task lifting. 
+Supporting light weight extensions for heavy task lifting. Enabling extensions that can do provide you with small digital luxuries!
 
 ## Installation
 

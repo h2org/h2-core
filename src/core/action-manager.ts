@@ -1,5 +1,6 @@
 import { globalShortcut, BrowserWindow } from 'electron';
 import { Action } from './action';
+import { IExtensions } from './interfaces/extensions';
 import * as extensions from "../config/extensions.json";
 
 /**

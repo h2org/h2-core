@@ -1,6 +1,6 @@
 # H2
 
-Inspired by being lazy, a hook-in and up system, supporting light weight extensions for heavy task lifting. 
+Supporting light weight extensions for heavy task lifting. The extensibility of H2's core enables building extensions that can provide you with small digital luxuries! Think Picture-in-picture for live streaming, youtube, images, videos or any other media source ([where it all began](https://github.com/h2org/H2)), cross-device clipboard sharing, mini games and other cool stuff.
 
 ## Installation
 

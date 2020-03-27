@@ -1,9 +1,9 @@
 import { app, BrowserWindow, BrowserWindowConstructorOptions, globalShortcut, ipcMain, Menu, session, Tray } from "electron";
 import * as path from "path";
 
-// const providers = require("./ServiceProviders/providers");
-// const fullscreenToggle = require("./lib/fullscreen-toggle");
-// const utils = require("./lib/util");
+const providers = require("./ServiceProviders/providers");
+const fullscreenToggle = require("./lib/fullscreen-toggle");
+const utils = require("./lib/util");
 
 import ActionManager from './core/action-manager'
 
@@ -146,9 +146,9 @@ ipcMain.on("exit-full-screen", () => {
   fullscreenToggle(mainWindow, true);
 });
 
-ipcMain.on("openLink", (ev, arg: string) => {
+ipcMain.on("openLink", (ev:any, arg: string) => {
   mainWindow.loadURL(arg);
-  mainWindow.webContents.on("did-finish-load", (event, url) => {
+  mainWindow.webContents.on("did-finish-load", (event:any, url:any) => {
     mainWindow.webContents.send("send-full-screen", "ping");
   });
 });

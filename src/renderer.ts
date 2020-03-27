@@ -4,14 +4,16 @@
 import { ipcRenderer } from "electron";
 
 
-// const notif = require("./lib/notifications");
+const notif = require("./lib/notifications");
 
 // Renderer.ts is responsible to register output services
-let player;
-
+let player : any;
+let YT : any;
+let Vimeo : any;
+let window: any;
 
 const apiPromise = new Promise((resolve) => {
-  window.onYouTubeIframeAPIReady = () => {
+  (window as any).onYouTubeIframeAPIReady = () => {
     //     console.log("YouTube API loaded");
     resolve();
   };
@@ -22,9 +24,9 @@ const apiPromise = new Promise((resolve) => {
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 });
 
-async function putYoutube(videoId) {
+async function putYoutube(videoId:any) {
   await apiPromise;
-  const pl = new YT.Player("video", {
+  const pl = new (YT as any).Player("video", {
     height: "100%",
     width: "100%",
     videoId,
@@ -34,10 +36,10 @@ async function putYoutube(videoId) {
       modestbranding: 1,
     },
     events: {
-      onReady: (event) => {
+      onReady: (event:any) => {
         console.log(event);
       },
-      onStateChange: (event) => {
+      onStateChange: (event:any) => {
         // console.log(event)
       },
     },
@@ -51,8 +53,8 @@ async function putYoutube(videoId) {
   };
 }
 
-function putVimeo(videoId) {
-  const pl = new Vimeo.Player(document.querySelector("#video"), {
+function putVimeo(videoId:any) {
+  const pl = new (Vimeo as any).Player(document.querySelector("#video"), {
     id: videoId,
     autoplay: true,
     transparent: false,
@@ -77,40 +79,40 @@ function togglePlay() {
   }
 }
 
-function defaultiFrame(arg) {
+function defaultiFrame(arg:any) {
   const web = `<iframe src="${arg}" frameborder="0" sandbox="allow-scripts allow-popups allow-forms allow-same-origin" allowfullscreen="" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; border-radius: 1px; pointer-events: auto; background-color: rgb(247, 246, 245);"></iframe>`;
   document.querySelector("#video").innerHTML = web;
 }
 
-window.addEventListener("keyup", function (e) {
+window.addEventListener("keyup", function (e:any) {
   if (e.key == "Escape") {
     ipcRenderer.send("exit-full-screen");
   }
 });
 
-ipcRenderer.on("togglePlay", (ev, arg) => {
+ipcRenderer.on("togglePlay", (ev:any, arg:any) => {
   togglePlay();
 });
 
-ipcRenderer.on("youtube", async (ev, arg) => {
+ipcRenderer.on("youtube", async (ev:any, arg:any) => {
   await putYoutube(arg);
   const frame = document.getElementById("video");
   console.log(frame);
 
   frame.addEventListener("load", function () {
     setTimeout(() => {
-      if (document.getElementById("video").contentDocument.querySelector(".ytp-error-content-wrap-reason")) {
+      if (document.getElementById("video").ownerDocument.querySelector(".ytp-error-content-wrap-reason")) {
         ipcRenderer.send("openLink", "https://youtube.com/watch?v=" + arg);
       }
     }, 2000);
   });
 });
 
-ipcRenderer.on("vimeo", (ev, arg) => {
+ipcRenderer.on("vimeo", (ev:any, arg:any) => {
   putVimeo(arg);
 });
 
-ipcRenderer.on("googleDocs", (ev, arg) => {
+ipcRenderer.on("googleDocs", (ev:any, arg:any) => {
   defaultiFrame(arg);
 });
 
@@ -118,7 +120,7 @@ ipcRenderer.on("invalidUrl", () => {
   notif("Oops! This isn't supported URL");
 });
 
-ipcRenderer.on("alertUser", (event, message, url) => {
+ipcRenderer.on("alertUser", (event:any, message:any, url:any) => {
   const userInput = confirm(message);
   if (userInput == true) {
     alert(

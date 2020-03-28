@@ -82,7 +82,7 @@ class ActionManager {
     });
   }
 
-  private clearGlobals() {
+  public clearGlobals() {
     globalShortcut.unregisterAll();
     this.globals = {};
   }

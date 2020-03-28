@@ -12,7 +12,7 @@
     "test": "mocha tests/spec.js --timeout 30000"
   },
   "build": {
-    "appId": "com.ipiush.h2"
+    "appId": "com.ipiyush.h2"
   },
   "repository": "https://github.com/poush/H2",
   "keywords": [
@@ -26,18 +26,10 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "electron": "^2.0.0",
-    "electron-builder": "^20.28.4",
-    "eslint": "^5.7.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
+    "electron": "^8.2.0",
     "mocha": "^5.2.0",
-    "spectron": "^4.0.0",
     "tslint": "^5.19.0",
-    "typescript": "^3.6.0"
+    "typescript": "^3.8.3"
   },
   "dependencies": {}
 }

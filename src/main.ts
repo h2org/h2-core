@@ -1,68 +1,40 @@
 import { app, BrowserWindow, BrowserWindowConstructorOptions, globalShortcut, ipcMain, Menu, session, Tray } from "electron";
 import * as path from "path";
 
-// const providers = require("./ServiceProviders/providers");
-// const fullscreenToggle = require("./lib/fullscreen-toggle");
-// const utils = require("./lib/util");
-
 import ActionManager from './core/action-manager'
 import ContextResource from "./core/context-resource";
-
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-
+import {config as browserWindowConfig} from "./config/browser-window";
 
 let mainWindow: BrowserWindow = null;
 let tray: Tray;
 
-function createWindow(): void {
+const createWindow = () => {
 
-  // create config
-  const config: BrowserWindowConstructorOptions = {
-    frame: false,
-    height: 300,
-    titleBarStyle: "customButtonsOnHover",
-    webPreferences: {
-      plugins: true,
-      preload: path.join(__dirname, "preload.js"),
-    },
-    width: 400,
-  };
 
   // Create the browser window.
-  mainWindow = new BrowserWindow(config);
+  mainWindow = new BrowserWindow(browserWindowConfig);
   mainWindow.setMenu(null);
 
   if (process.platform === "darwin") { app.dock.hide(); }
 
   mainWindow.setVisibleOnAllWorkspaces(true);
-  mainWindow.setFullScreenable(false);
 
   // and load the index.html of the app.
   mainWindow.loadFile("src/index.html");
-  // mainWindow.loadURL('https://www.netflix.com')
 
   // Open the DevTools.
   if (process.env.DEV === "1") { mainWindow.webContents.openDevTools(); }
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-
     mainWindow = null;
   });
 
   // Disable new browser windows and popups
-  mainWindow.webContents.on("new-window", (e, url) => {
+  mainWindow.webContents.on("new-window", (e:any, url:string) => {
     e.preventDefault();
-    providers.run(mainWindow, url);
     mainWindow.focus();
   });
-
-  const actionManager = new ActionManager(mainWindow);
-  actionManager.applyActions();
 
   // DEPRECATED, Doesn't Work. TODO: Test before removing
   // globalShortcut.register("Alt+Shift+T", () => {
@@ -72,38 +44,38 @@ function createWindow(): void {
 }
 
 const createMenuTray = () => {
-  tray = new Tray(__dirname + "/assets/images/tray.png");
+  // tray = new Tray(__dirname + "/assets/images/tray.png");
 
-  const trayMenus = [
-    { role: "about" },
-    {
-      label: "Exit Fullscreen",
-      click() {
-        fullscreenToggle(mainWindow, true);
-      },
-    },
-    {
-      label: "Quit",
-      click() {
-        app.quit();
-      },
-    },
-    {
-      label: "Bring H2 to the front",
-      click() {
-        utils.resetWindowToFloat(mainWindow);
-      },
-    },
-  ];
+  // // const trayMenus = [
+  // //   { role: "about" },
+  // //   {
+  // //     label: "Exit Fullscreen",
+  // //     click() {
+  // //       fullscreenToggle(mainWindow, true);
+  // //     },
+  // //   },
+  // //   {
+  // //     label: "Quit",
+  // //     click() {
+  // //       app.quit();
+  // //     },
+  // //   },
+  // //   {
+  // //     label: "Bring H2 to the front",
+  // //     click() {
+  // //       utils.resetWindowToFloat(mainWindow);
+  // //     },
+  // //   },
+  // // ];
 
-  const contextMenu = Menu.buildFromTemplate(trayMenus);
+  // // const contextMenu = Menu.buildFromTemplate(trayMenus);
 
-  tray.setToolTip("H2");
-  tray.setContextMenu(contextMenu);
-  tray.setTitle("H2");
-  tray.on("click", (event) => {
-    !mainWindow.isFocused() ? mainWindow.focus() : true;
-  });
+  // tray.setToolTip("H2");
+  // // tray.setContextMenu(contextMenu);
+  // tray.setTitle("H2");
+  // tray.on("click", (event) => {
+  //   !mainWindow.isFocused() ? mainWindow.focus() : true;
+  // });
 };
 
 // This method will be called when Electron has finished
@@ -112,9 +84,10 @@ const createMenuTray = () => {
 
 app.on("ready", () => {
   session.defaultSession.clearStorageData();
+  
   createWindow();
-  utils.resetWindowToFloat(mainWindow);
-  createMenuTray();
+  // createMenuTray();
+
   const context = new ContextResource({
     platform: "generic",
     webContents: mainWindow.webContents
@@ -129,15 +102,7 @@ app.on("will-quit", () => {
 
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  // if (process.platform !== 'darwin') {
   app.quit();
-  // }
-});
-// Unregister all shortcuts.
-app.on("will-quit", () => {
-  globalShortcut.unregisterAll();
 });
 
 app.on("activate", () => {
@@ -148,15 +113,11 @@ app.on("activate", () => {
   }
 });
 
-ipcMain.on("exit-full-screen", () => {
-  fullscreenToggle(mainWindow, true);
-});
-
-ipcMain.on("openLink", (ev, arg: string) => {
+// If there is any hyper link on the existing page then avoid
+// loading a new page. @TODO: try to use remote from renderer
+ipcMain.on("openLink", (ev:any, arg: string) => {
   mainWindow.loadURL(arg);
-  mainWindow.webContents.on("did-finish-load", (event, url) => {
+  mainWindow.webContents.on("did-finish-load", (event:any, url:string) => {
     mainWindow.webContents.send("send-full-screen", "ping");
   });
 });
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.

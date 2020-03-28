@@ -1,4 +1,5 @@
-import { IConfig } from "../core/interfaces/config";
+import { IConfig } from "../core/types/interfaces/config";
+
 
 export class Config {
 

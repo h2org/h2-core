@@ -4,15 +4,10 @@
         "noImplicitAny": true,
         "sourceMap": true,
         "outDir": "dist",
-        "resolveJsonModule": true,
-        "target": "es2015",
         "baseUrl": ".",
         "paths": {
-            "*": [
-                "node_modules/*"
-            ]
+            "*": ["node_modules/*"]
         },
-        "rootDir": "."
     },
     "include": [
         "src/**/*"

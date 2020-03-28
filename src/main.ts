@@ -119,7 +119,7 @@ app.on("ready", () => {
     platform: "generic",
     webContents: mainWindow.webContents
   })
-  ActionManager.start()
+  ActionManager.start(context);
 });
 
 app.on("will-quit", () => {

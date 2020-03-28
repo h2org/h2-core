@@ -1,3 +1,7 @@
+const handleClipboardPaste = () => {
+  console.log("Cmd+Shift+V")
+}
+
 export default {
-  'CMD'
+  'Cmd+Shift+V': handleClipboardPaste
 }

@@ -31,7 +31,7 @@ class ActionManager {
     superuser: boolean,
     action: IAction | IExtension,
   }>;
-
+  
   private globals: {
     [key: string]: Function
   } ;

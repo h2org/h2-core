@@ -1,6 +1,7 @@
-import { ContextResource } from "../core/context-resource";
+
 import { ActionTypes } from "./types/interfaces/action-types";
 import OutputService from "../outputs/output-service";
+import ContextResource from "./context-resource";
 
 export abstract class Action {
 

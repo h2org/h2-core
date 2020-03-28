@@ -84,7 +84,7 @@ class ActionManager {
 
   private clearGlobals() {
     globalShortcut.unregisterAll();
-    this.globals = [];
+    this.globals = {};
   }
 }
 

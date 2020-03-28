@@ -2,6 +2,8 @@ import { GlobalShortcut, globalShortcut } from "electron";
 
 import IAction from "./types/interfaces/action.js";
 import { IExtension } from "./types/interfaces/extension";
+import ContextResource from "./context-resource.js";
+import OutputService from "../outputs/output-service.js";
 
 /**
  * A global action manager, which is responsible for listening to
@@ -23,6 +25,7 @@ class ActionManager {
   }
 
   private static instance: ActionManager;
+  private outputService: OutputService;
 
   private actions: Array<{
     superuser: boolean,
@@ -59,7 +62,8 @@ class ActionManager {
     });
   }
 
-  public start(): ActionManager {
+  public start(context: ContextResource): ActionManager {
+    this.outputService = OutputService.get_instance(context);
     if (!this.actionsRegistered) {
       this.registerGlobals();
       this.actionsRegistered = true;

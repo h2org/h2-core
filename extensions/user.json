@@ -1,0 +1,12 @@
+[
+    {
+      "name": "PIP Media",
+      "filename": "pip-media",
+      "author": "xx",
+      "actions": {
+        "CLIPBOARD_TEXT": [
+            "pip-vimeo"
+          ]
+      }
+    }
+]

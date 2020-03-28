@@ -1,3 +1,4 @@
 export enum ActionTypes {
-    CLIPBOARD_TEXT = "CLIPBOARD_TEXT",
+    EMBED   = "EMBED",
+    LINK    = "LINK"
 }

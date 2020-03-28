@@ -1,0 +1,12 @@
+[
+  {
+    "name": "PIP Youtube",
+    "filename": "pip-youtube",
+    "author": "xx",
+    "actions": {
+      "CLIPBOARD_TEXT": [
+        "youtube"
+      ]
+    }
+  }
+]

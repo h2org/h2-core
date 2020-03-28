@@ -6,6 +6,7 @@ import * as path from "path";
 // const utils = require("./lib/util");
 
 import ActionManager from './core/action-manager'
+import ContextResource from "./core/context-resource";
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -114,6 +115,11 @@ app.on("ready", () => {
   createWindow();
   utils.resetWindowToFloat(mainWindow);
   createMenuTray();
+  const context = new ContextResource({
+    platform: "generic",
+    webContents: mainWindow.webContents
+  })
+  ActionManager.start()
 });
 
 app.on("will-quit", () => {

@@ -1,17 +1,28 @@
 import { WebContents } from "electron";
+import ContextResource from "../core/context-resource";
 
-export abstract class OutputService {
+export default class OutputService {
 
-    public eventToListen: string;
-    public webContents: WebContents;
+    private webContents: WebContents;
 
-    constructor(data: {
-        webContents: WebContents;
-        event: string;
-    }) {
-        this.eventToListen = data.event;
-        this.webContents = data.webContents;
+    public static get_instance(context?: ContextResource) {
+        if (!OutputService.instance) {
+            OutputService.instance = new OutputService(context);
+        }
+        return OutputService.instance;
+    }
+    
+    private static instance: OutputService;
+
+    private constructor(context: ContextResource) {
+        this.webContents = context.webContents
     }
 
-    public abstract handle(): void;
+    public embedJS(js: string){
+        return true
+    }
+
+    public loadUrl(url: string){
+        return true
+    }
 }

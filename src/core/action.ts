@@ -12,5 +12,5 @@ export abstract class Action {
      */
     public abstract resolver(context: ContextResource | undefined): void;
 
-    public abstract subKeyHandler(context: ContextResource): void;
+    // public abstract subKeyHandler(context: ContextResource): void;
 }

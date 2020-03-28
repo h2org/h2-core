@@ -118,7 +118,7 @@ app.on("ready", () => {
 
 app.on("will-quit", () => {
   // Unregister all shortcuts.
-  globalShortcut.unregisterAll();
+  ActionManager.clearGlobals();
 });
 
 // Quit when all windows are closed.

@@ -69,7 +69,7 @@ class ActionManager {
 
   private registerGlobals() {
     if (this.globals.length) {
-      this.cleanGlobals();
+      this.clearGlobals();
     }
     this.actions.forEach((action) => {
       if (!("publicExtension" in action)) {
@@ -78,7 +78,7 @@ class ActionManager {
     });
   }
 
-  private cleanGlobals() {
+  private clearGlobals() {
     globalShortcut.unregisterAll();
     this.globals = [];
   }

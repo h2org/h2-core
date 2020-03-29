@@ -25,7 +25,8 @@ install:
 - yarn
 
 script:
-- npm run test
+- npm run lint
+- tsc
 
 before_deploy:
 - npm run build

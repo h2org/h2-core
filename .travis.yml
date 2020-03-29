@@ -19,13 +19,18 @@ before_script:
 cache:
   yarn: true
 
+before-install:
+  -npm install -g typescript@2.7.2
+
 install:
 - curl -L https://yarnpkg.com/latest.tar.gz | tar xz && mv yarn-* $HOME/.yarn
 - export PATH="$HOME/.yarn/bin:$PATH"
 - yarn
 
 script:
-- npm run test
+#- npm run test
+- npm run lint
+- tsc
 
 before_deploy:
 - npm run build

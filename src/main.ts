@@ -7,7 +7,7 @@ import ContextResource from "./core/context-resource";
 import {config as browserWindowConfig} from "./config/browser-window";
 
 let mainWindow: BrowserWindow = null;
-const tray: Tray;
+// let tray: Tray;
 
 const createWindow = () => {
 

@@ -140,5 +140,6 @@ import { ipcRenderer } from "electron";
 // });
 
 ipcRenderer.on("ping", (event: Event) => {
+  // tslint:disable-next-line:no-console
   console.log("ping", event);
 });

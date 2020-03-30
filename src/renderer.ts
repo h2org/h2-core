@@ -44,7 +44,15 @@ import { ipcRenderer } from "electron";
 //       },
 //     },
 //   });
-//   document.body.innerHTML += `<button onclick="location.reload()" style="cursor:pointer;border:none;background:none;z-index:999999;margin:60vh 82% 0 0;opacity:.5;font-weight:800"><svg version="1.1" id="h2-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 25"  xml:space="preserve"><g><circle class="white" cx="13.5" cy="22.8" r="2.1"></circle><polygon class="white" points="13.5,0 0,11.2 0,24.6 2.8,24.6 2.8,12.5 13.5,3.7 24.2,12.5 24.2,24.6 27,24.6 27,11.2 	"></polygon></g></svg></button>`;
+
+// document.body.innerHTML +=
+// `<button onclick="location.reload()" style="cursor:pointer;border:none;
+// background:none;z-index:999999;margin:60vh 82% 0 0;opacity:.5;font-weight:800">
+// <svg version="1.1" id="h2-icon" xmlns="http://www.w3.org/2000/svg"
+// xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 27 25"  xml:space="preserve">
+// <g><circle class="white" cx="13.5" cy="22.8" r="2.1"></circle>
+// <polygon class="white" points="13.5,0 0,11.2 0,24.6 2.8,24.6 2.8,12.5 13.5,3.7 24.2,12.5 24.2,24.6 27,24.6 27,11.2">
+// </polygon></g></svg></button>`;
 
 //   window.player = pl;
 //   player = {
@@ -80,7 +88,9 @@ import { ipcRenderer } from "electron";
 // }
 
 // function defaultiFrame(arg) {
-//   const web = `<iframe src="${arg}" frameborder="0" sandbox="allow-scripts allow-popups allow-forms allow-same-origin" allowfullscreen="" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; border-radius: 1px; pointer-events: auto; background-color: rgb(247, 246, 245);"></iframe>`;
+// const web = `<iframe src="${arg}" frameborder="0" sandbox="allow-scripts allow-popups allow-forms allow-same-origin"
+// allowfullscreen="" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;
+// border-radius: 1px; pointer-events: auto; background-color: rgb(247, 246, 245);"></iframe>`;
 //   document.querySelector("#video").innerHTML = web;
 // }
 
@@ -130,5 +140,5 @@ import { ipcRenderer } from "electron";
 // });
 
 ipcRenderer.on("ping", (event: Event) => {
-  console.log("ping", event)
-})
+  console.log("ping", event);
+});

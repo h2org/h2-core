@@ -2,17 +2,19 @@ import { GlobalShortcut, globalShortcut } from "electron";
 
 import IAction from "./types/interfaces/action.js";
 import { IExtension } from "./types/interfaces/extension";
+
 import ContextResource from "./context-resource.js";
+
 import OutputService from "../outputs/output-service.js";
 
 /**
  * A global action manager, which is responsible for listening to
  * actions that can be managed by H2
- * 
+ *
  * Constructor loads global shortcut key maps and loads actions json
  * addActions() iteractes over all enabled action and creates instance of the action from the action json
  * also, creates key combinations map for enabled extensions.
- * 
+ *
  * registerGlobals() registers global shortcuts as requested by the actions and ties them with their callback.
  */
 class ActionManager {
@@ -31,9 +33,8 @@ class ActionManager {
     superuser: boolean,
     action: IAction | IExtension,
   }>;
-  
   private globals: {
-    [key: string]: Function
+    [key: string]: () => void, // Function,
   } ;
   private actionsRegistered: boolean = false;
 
@@ -70,21 +71,17 @@ class ActionManager {
     }
     return this;
   }
-
+  public clearGlobals() {
+    globalShortcut.unregisterAll();
+    this.globals = {};
+  }
   private registerGlobals() {
     if (this.globals.length) {
       this.clearGlobals();
     }
     this.actions.forEach((action) => {
-      if (!("publicExtension" in action)) {
-
-      }
+      // if (!("publicExtension" in action)) {}
     });
-  }
-
-  public clearGlobals() {
-    globalShortcut.unregisterAll();
-    this.globals = {};
   }
 }
 

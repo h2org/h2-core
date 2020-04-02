@@ -3,5 +3,5 @@ export interface IExtension {
 }
 
 export interface IExtensions {
-  enabled: IExtension[]; // Array<IExtension>
+  enabled: IExtension[];
 }

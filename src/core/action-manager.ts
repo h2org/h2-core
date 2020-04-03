@@ -34,7 +34,7 @@ class ActionManager {
     action: IAction | IExtension,
   }>;
   private globals: {
-    [key: string]: () => void, // Function,
+    [key: string]: () => void,
   } ;
   private actionsRegistered: boolean = false;
 

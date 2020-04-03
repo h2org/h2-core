@@ -11,11 +11,6 @@ matrix:
     - os: osx
   fast_finish: true
 
-before_script:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
-
 cache:
   yarn: true
 
@@ -25,7 +20,8 @@ install:
 - yarn
 
 script:
-- npm run test
+- npm run lint
+- tsc
 
 before_deploy:
 - npm run build

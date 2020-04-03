@@ -1,7 +1,7 @@
 export interface IExtension {
-  name: String;
+  name: string;
 }
 
 export interface IExtensions {
-  enabled: Array<IExtension>
+  enabled: IExtension[];
 }

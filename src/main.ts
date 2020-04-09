@@ -1,12 +1,13 @@
 import { app, BrowserWindow, BrowserWindowConstructorOptions, globalShortcut, ipcMain, Menu, session, Tray } from "electron";
 import * as path from "path";
 
-import ActionManager from './core/action-manager'
+import ActionManager from "./core/action-manager";
 import ContextResource from "./core/context-resource";
+
 import {config as browserWindowConfig} from "./config/browser-window";
 
 let mainWindow: BrowserWindow = null;
-let tray: Tray;
+// let tray: Tray;
 
 const createWindow = () => {
 
@@ -31,7 +32,7 @@ const createWindow = () => {
   });
 
   // Disable new browser windows and popups
-  mainWindow.webContents.on("new-window", (e:any, url:string) => {
+  mainWindow.webContents.on("new-window", (e: any, url: string) => {
     e.preventDefault();
     mainWindow.focus();
   });
@@ -41,7 +42,7 @@ const createWindow = () => {
   //   // brings the window to top always
   //   utils.resetWindowToFloat(mainWindow);
   // });
-}
+};
 
 const createMenuTray = () => {
   // tray = new Tray(__dirname + "/assets/images/tray.png");
@@ -84,14 +85,14 @@ const createMenuTray = () => {
 
 app.on("ready", () => {
   session.defaultSession.clearStorageData();
-  
+
   createWindow();
   // createMenuTray();
 
   const context = new ContextResource({
     platform: "generic",
-    webContents: mainWindow.webContents
-  })
+    webContents: mainWindow.webContents,
+  });
   ActionManager.start(context);
 });
 
@@ -115,9 +116,9 @@ app.on("activate", () => {
 
 // If there is any hyper link on the existing page then avoid
 // loading a new page. @TODO: try to use remote from renderer
-ipcMain.on("openLink", (ev:any, arg: string) => {
+ipcMain.on("openLink", (ev: any, arg: string) => {
   mainWindow.loadURL(arg);
-  mainWindow.webContents.on("did-finish-load", (event:any, url:string) => {
+  mainWindow.webContents.on("did-finish-load", (event: any, url: string) => {
     mainWindow.webContents.send("send-full-screen", "ping");
   });
 });

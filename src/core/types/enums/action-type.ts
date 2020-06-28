@@ -1,0 +1,4 @@
+export enum ActionType {
+    CLIPBOARD_TEXT = "CLIPBOARD_TEXT",
+    CLIPBOARD_IMAGE = "CLIPBOARD_IMAGE",
+}

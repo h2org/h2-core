@@ -21,8 +21,9 @@ body {
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  background-image: linear-gradient(0deg, #ebfcff 0%, #ffffff 89%);
+  background-image: #000;
   font-family: Roboto, sans-serif;
+  -webkit-app-region: drag !important;
 }
 
 .drop-it-hot {

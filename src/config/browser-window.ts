@@ -6,6 +6,10 @@ export const config: BrowserWindowConstructorOptions = {
     height: 300,
     width: 400,
 
+    // position
+    x: 100,
+    y: 0,
+
     /**
      * disable frame only for non darwin process
      * for darwin, use titleBarStyle as hidden
@@ -18,5 +22,15 @@ export const config: BrowserWindowConstructorOptions = {
 
     // to avoid any possible conflicts with picture in picture
     fullscreenable: false,
+
+    // experimental for linux OS
+    focusable: false,
+
+    // let's support eyes by default
+    darkTheme: true,
+
+    webPreferences: {
+        nodeIntegration: true,
+    },
 
 };

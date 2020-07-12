@@ -6,7 +6,6 @@ import ContextResource from "./core/context-resource";
 import OutputService from "./outputs/output-service";
 
 let mainWindow: BrowserWindow = null;
-// let tray: Tray;
 
 const createWindow = () => {
 
@@ -23,7 +22,13 @@ const createWindow = () => {
   mainWindow.loadFile("../index.html");
 
   // Open the DevTools.
-  if (process.env.DEV === "1") { mainWindow.webContents.openDevTools(); }
+  if (process.env.NODE_ENV === "develop") {
+    mainWindow.webContents.openDevTools();
+
+  }
+
+  // @TODO: remove line
+  // mainWindow.setIgnoreMouseEvents(true);
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
@@ -36,11 +41,14 @@ const createWindow = () => {
     mainWindow.focus();
   });
 
+  mainWindow.webContents.userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36";
+
   // DEPRECATED, Doesn't Work. TODO: Test before removing
   // globalShortcut.register("Alt+Shift+T", () => {
   //   // brings the window to top always
   //   utils.resetWindowToFloat(mainWindow);
   // });
+  return mainWindow;
 };
 
 const createMenuTray = () => {
@@ -78,6 +86,19 @@ const createMenuTray = () => {
   // });
 };
 
+const registerOutputServiceEvents = (window: BrowserWindow) => {
+  OutputService.getInstance()
+    .on("loadUrl", (args) => {
+      window.loadURL(args[0]);
+    })
+    .on("hideOnHover", (args) => {
+      if (args[0] === "enable") {
+        window.setIgnoreMouseEvents(true);
+      } else {
+        window.setIgnoreMouseEvents(true);
+      }
+    });
+};
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -85,7 +106,7 @@ const createMenuTray = () => {
 app.on("ready", () => {
   session.defaultSession.clearStorageData();
 
-  createWindow();
+  const mainWindow = createWindow();
   // createMenuTray();
 
   const context = new ContextResource({
@@ -94,6 +115,8 @@ app.on("ready", () => {
   });
   OutputService.getInstance(context);
   ActionManager.start(context);
+
+  registerOutputServiceEvents(mainWindow);
 });
 
 app.on("will-quit", () => {

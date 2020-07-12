@@ -44,7 +44,7 @@ class ActionManager {
 
   private constructor() {
     this.hotKeys = {
-      CLIPBOARD_PASTE: ["cmd+shift+v"],
+      CLIPBOARD_PASTE: ["cmd+shift+v", "ctrl+shift+v"],
     };
     this.areGlobalsDirty = true;
     this.activeGlobals = {
@@ -99,7 +99,6 @@ class ActionManager {
     this.actions.forEach((action) => {
       this.activeGlobals[action.action.hotKey].push(action.action);
     });
-    console.log(this.activeGlobals);
     this.areGlobalsDirty = true;
   }
 

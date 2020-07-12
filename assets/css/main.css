@@ -14,6 +14,34 @@
   margin: 0;
 }
 
+#video {
+  width: 100%;
+}
+.h2logo {
+  width: 50%;
+  margin: auto auto;
+  height: auto;
+  display: block;
+}
+
+.welcomeText {
+  color: #fff;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.supportText {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  color: #3e3e3e;
+  text-align: center;
+  font-size: 0.8 rem;
+}
+.supportText a {
+  color: #3e3e3e;
+}
+
 body {
   display: flex;
   flex-direction: column;

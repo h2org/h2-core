@@ -24,7 +24,7 @@ export const config: BrowserWindowConstructorOptions = {
     fullscreenable: false,
 
     // experimental for linux OS
-    focusable: false,
+    focusable: true,
 
     // let's support eyes by default
     darkTheme: true,

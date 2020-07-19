@@ -44,4 +44,9 @@ export default class ContextResource {
                 throw new Error("Invalid Resource Type");
         }
     }
+
+    public removeWebContents() {
+        this.webContents = null;
+        return this;
+    }
 }

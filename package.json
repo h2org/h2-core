@@ -28,7 +28,10 @@
     "chai-as-promised": "^7.1.1",
     "electron": "^8.2.0",
     "electron-reload": "^1.5.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
     "mocha": "^5.2.0",
+    "prettier": "^2.0.5",
     "tslint": "^5.19.0",
     "typescript": "^3.8.3"
   },

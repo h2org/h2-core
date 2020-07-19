@@ -114,7 +114,7 @@ app.on("ready", () => {
     webContents: mainWindow.webContents,
   });
   OutputService.getInstance(context);
-  ActionManager.start(context);
+  ActionManager.start(context.removeWebContents());
 
   registerOutputServiceEvents(mainWindow);
 });

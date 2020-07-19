@@ -19,7 +19,6 @@ export default class YoutubePlayerAction extends Action {
   public resolver(context: ContextResource): void {
     const videoId = context.clipboardText.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0];
     this.output.insertIframe("https://www.youtube.com/embed/" + videoId);
-    // this.outputService.fullScreen();
   }
 
   public canHandle(context: ContextResource) {

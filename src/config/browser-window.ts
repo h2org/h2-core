@@ -30,7 +30,10 @@ export const config: BrowserWindowConstructorOptions = {
     darkTheme: true,
 
     webPreferences: {
-        nodeIntegration: true,
+        nodeIntegration: false,
+        partition: "persist:h2Main",
+        plugins: true,
+        sandbox: true,
     },
 
 };

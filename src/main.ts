@@ -2,12 +2,17 @@ import { app, BrowserWindow, ipcMain, session } from "electron";
 
 import ActionManager from "./action-manager";
 import { config as browserWindowConfig } from "./config/browser-window";
+import tray from "./core/components/tray";
 import ContextResource from "./core/context-resource";
 import OutputService from "./outputs/output-service";
 
 let mainWindow: BrowserWindow = null;
 
 const createWindow = () => {
+
+  app.whenReady().then(() => {
+    tray({ iconPath: "assets/images/tray.png" });
+  });
 
   // should be first thing
   if (process.platform === "darwin") { app.dock.hide(); }

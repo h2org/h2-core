@@ -2,34 +2,40 @@
   "name": "h2",
   "version": "0.1.1alpha",
   "description": "A mini browser to embed on top of screens",
-  "main": "src/main.js",
+  "main": "dist/main.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "start": "npm run build && electron ./dist/main.js",
     "lint:fix": "eslint ./src/**/*.js ./tests/**/*.js --fix",
-    "test": "mocha tests/spec.js --timeout 30000"
+    "test": "mocha tests/spec.js --timeout 30000",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "build": {
-    "appId": "com.ipiyush.h2"
+    "appId": "com.ipiyush.h2",
+    "productName": "H2",
+    "directories": {
+      "output": "releases"
+    }
   },
-  "repository": "https://github.com/poush/H2",
+  "repository": "https://github.com/h2org/h2-core",
   "keywords": [
     "electron",
     "picture-in-picture",
     "browser",
     "embed"
   ],
-  "author": "poush",
   "license": "CC0-1.0",
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "electron": "^8.2.0",
+    "electron": "^8.5.0",
+    "electron-builder": "^22.8.0",
     "mocha": "^5.2.0",
     "tslint": "^5.19.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "winston": "^3.3.3"

@@ -2,3 +2,6 @@ node_modules
 yarn*
 dist/
 .idea/
+releases/
+.vscode/
+.DS_Store
